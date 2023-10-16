@@ -3,7 +3,7 @@ import { useStyles } from "./DisolayAllTodoCss";
 import {useState,useEffect} from 'react'
 import MaterialTable from "@material-table/core"
 import { serverURL,getData,postData } from "./FetchNodeServices";
-import { Avatar,Grid,TextField,Button ,Dialog,DialogActions,DialogContent,FormControl,} from "@mui/material";
+import { Avatar,Grid,TextField,Button ,Dialog,DialogActions,DialogContent,FormControl, AppBar, Toolbar, Typography,} from "@mui/material";
 import Heading from "./heading";
 import UploadFile from '@mui/icons-material/UploadFile';
 import Swal from 'sweetalert2';
@@ -196,13 +196,44 @@ export default function DisplayAllCategory()
     )
   }
 
+  const handlelogout=() => {
+    
+    localStorage.clear();
+    navigate.push("/login");
+  };
+
    return(
-    <div className={classes.rootDisplay}>
-      <div className={classes.boxDisplay}>
-          
-      {displayAll()}
-    </div>
-      {showDialogForEdit()}
+    <div>
+
+<div >
+        <Grid container spacing={2}>
+          <AppBar position="sticky"> 
+              <Toolbar variant="dense"> 
+                <Typography variant="h6" color="inherit" component="div" >
+                  <div style={{display:"flex",flexDirection:"row",justifyContent:'space-evenly',alignItems:"center"}}>
+                    <div>Hello   
+                    {" "+admin.userfirstname+" "+admin.userlastname}
+                    </div>
+
+                      <div> 
+                      <Button variant="text"  color="secondary" onClick={handlelogout} >
+                      Logout
+                      </Button>
+                      </div>
+                  </div>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+        </Grid>
+      </div> 
+
+      <div className={classes.rootDisplay}>
+        <div className={classes.boxDisplay}>
+            
+        {displayAll()}
+      </div>
+        {showDialogForEdit()}
+      </div>
     </div>
    )
 }   
